@@ -1,11 +1,56 @@
-import React from 'react';
+'use client';
+import React, { useContext } from "react";
+import { toast } from "react-toastify";
+import Image from "next/image";
+import { InstallAppsContext } from "@/context/install.context";
 
-const InstallationPage = () => {
+const InstallApps = () => {
+    const { installedApps, setInstalledApps } = useContext(InstallAppsContext);
+    console.log(installedApps, "contextData");
+
+    const handleUninstall = (app) => {
+        console.log(app, "need to uninstall");
+
+        const restApps = installedApps.filter((iApp) => iApp.id != app.id);
+        console.log(restApps, "restApps");
+
+        setInstalledApps(restApps);
+        toast.warning(`${app.title} is uninstalled!`);
+    };
+
     return (
-        <div>
-            <h1 className="text-4xl font-bold text-gray-800">Installation Page</h1>
+        <div className="container mx-auto my-10">
+            {installedApps.length === 0 ? (
+                <h2 className="font-bold text-4xl text-center my-5">
+                    No installed apps found!
+                </h2>
+            ) : (
+                installedApps.map((app, ind) => {
+                    return (
+                        <div
+                            key={ind}
+                            className="flex gap-4 items-center justify-between shadow p-4 rounded-md bg-slate-100 mb-4"
+                        >
+                            <div className="flex items-center gap-2">
+                                <Image src={app.image}
+                                    alt=""
+                                    width={100}
+                                    height={100}
+                                />
+                                <h2 className="font-semibold text-2xl">{app.title}</h2>
+                            </div>
+                            <button
+                                className="btn bg-secondary text-white"
+                                onClick={() => handleUninstall(app)}
+                            >
+                                Uninstall
+                            </button>
+                        </div>
+                    );
+                })
+            )}
         </div>
     );
 };
 
-export default InstallationPage;
+export default InstallApps;

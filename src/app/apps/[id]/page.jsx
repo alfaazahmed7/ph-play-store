@@ -1,3 +1,4 @@
+import InstallToggleButton from '@/components/apps/InstallToggleButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -27,7 +28,7 @@ const appsDetailPage = async ({ params }) => {
                 <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
                     <div className="overflow-hidden rounded-3xl bg-base-200 shadow-xl relative py-10 flex items-center justify-center">
                         <Image
-                        className='mx-auto flex rounded-lg'
+                            className='mx-auto flex rounded-lg'
                             src={app.image}
                             alt={app.title}
                             width={200}
@@ -77,6 +78,7 @@ const appsDetailPage = async ({ params }) => {
                         </div>
 
                         <div className="flex flex-wrap gap-3">
+                            <InstallToggleButton app={app} />
                             <Link href="/apps" className="px-6 py-3 rounded-lg bg-gray-300 text-gray-800 font-semibold hover:bg-gray-400 transition">
                                 Back to apps
                             </Link>

@@ -1,6 +1,5 @@
 import AppCard from "../ui/AppCard";
 import Link from "next/link";
-import { HashLoader } from "react-spinners";
 
 const appsPromisse = async () => {
     const res = await fetch("http://localhost:3000/data.json");
