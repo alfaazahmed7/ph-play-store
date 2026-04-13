@@ -5,7 +5,6 @@ import React from 'react';
 
 const MyLink = ({ href, children }) => {
     const pathname = usePathname();
-    console.log("pathname:", pathname);
 
     return (
         <Link href={href}
